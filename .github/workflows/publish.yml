@@ -28,6 +28,7 @@ jobs:
             tidyverse
             rmarkdown
             knitr
+            palmerpenguins
           cache: false  # we are manually caching above!
 
       - name: Install Quarto
