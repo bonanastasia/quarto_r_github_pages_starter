@@ -4,13 +4,99 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "Welcome\nThis is the homepage!"
+    "text": "Welcome\nThis is the homepage!",
+    "crumbs": [
+      "Project Overview"
+    ]
   },
   {
-    "objectID": "01-analysis.html",
-    "href": "01-analysis.html",
-    "title": "Analysis",
+    "objectID": "00-import-clean-penguins.html",
+    "href": "00-import-clean-penguins.html",
+    "title": "Import Palmer’s penguins data",
     "section": "",
-    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\npenguins &lt;- palmerpenguins::penguins\nsummary(penguins)\n\n      species          island    bill_length_mm  bill_depth_mm  \n Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  \n Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  \n Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  \n                                 Mean   :43.92   Mean   :17.15  \n                                 3rd Qu.:48.50   3rd Qu.:18.70  \n                                 Max.   :59.60   Max.   :21.50  \n                                 NA's   :2       NA's   :2      \n flipper_length_mm  body_mass_g       sex           year     \n Min.   :172.0     Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :197.0     Median :4050   NA's  : 11   Median :2008  \n Mean   :200.9     Mean   :4202                Mean   :2008  \n 3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  \n Max.   :231.0     Max.   :6300                Max.   :2009  \n NA's   :2         NA's   :2"
+    "text": "Data overview: The palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.\nData collection: These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. - Source: Allison Horst",
+    "crumbs": [
+      "Import Palmer's penguins data"
+    ]
+  },
+  {
+    "objectID": "00-import-clean-penguins.html#about-our-data",
+    "href": "00-import-clean-penguins.html#about-our-data",
+    "title": "Import Palmer’s penguins data",
+    "section": "",
+    "text": "Data overview: The palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.\nData collection: These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. - Source: Allison Horst",
+    "crumbs": [
+      "Import Palmer's penguins data"
+    ]
+  },
+  {
+    "objectID": "00-import-clean-penguins.html#import-penguins",
+    "href": "00-import-clean-penguins.html#import-penguins",
+    "title": "Import Palmer’s penguins data",
+    "section": "Import penguins",
+    "text": "Import penguins\n\npalmer_penguins_raw &lt;- tibble(penguins)\n\npalmer_penguins_raw",
+    "crumbs": [
+      "Import Palmer's penguins data"
+    ]
+  },
+  {
+    "objectID": "00-import-clean-penguins.html#cleanup-penguins",
+    "href": "00-import-clean-penguins.html#cleanup-penguins",
+    "title": "Import Palmer’s penguins data",
+    "section": "Cleanup penguins",
+    "text": "Cleanup penguins\nFor our purposes, we need to remove any entries that are missing the sex value.\n\npalmer_penguins_clean &lt;- palmer_penguins_raw |&gt; \n  filter(\n  !is.na(sex)\n)\n\npalmer_penguins_clean\n\n\n  \n\n\n\nOk, that brought our count down to 333 penguins. We’re ready to export for our analysis!",
+    "crumbs": [
+      "Import Palmer's penguins data"
+    ]
+  },
+  {
+    "objectID": "00-import-clean-penguins.html#export-penguins",
+    "href": "00-import-clean-penguins.html#export-penguins",
+    "title": "Import Palmer’s penguins data",
+    "section": "Export penguins",
+    "text": "Export penguins\nLet’s export our dataset as an RDS file for our analysis\n\npalmer_penguins_clean |&gt; write_rds(\"data-processed/palmer_penguins_clean.RDS\")",
+    "crumbs": [
+      "Import Palmer's penguins data"
+    ]
+  },
+  {
+    "objectID": "01-penguin-analysis.html",
+    "href": "01-penguin-analysis.html",
+    "title": "Palmer’s penguins analysis",
+    "section": "",
+    "text": "Let’s find out:\n\nHow many male and female penguins there are\nHow many of each type was observed\nAverage bill length by sex\nAverage bill length by species",
+    "crumbs": [
+      "Palmer's penguins analysis"
+    ]
+  },
+  {
+    "objectID": "01-penguin-analysis.html#about-this-notebook",
+    "href": "01-penguin-analysis.html#about-this-notebook",
+    "title": "Palmer’s penguins analysis",
+    "section": "",
+    "text": "Let’s find out:\n\nHow many male and female penguins there are\nHow many of each type was observed\nAverage bill length by sex\nAverage bill length by species",
+    "crumbs": [
+      "Palmer's penguins analysis"
+    ]
+  },
+  {
+    "objectID": "01-penguin-analysis.html#import-penguins",
+    "href": "01-penguin-analysis.html#import-penguins",
+    "title": "Palmer’s penguins analysis",
+    "section": "Import penguins",
+    "text": "Import penguins\nAbout our data: The palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. - Source: Allison Horst\nNotes about units:\n\nLengths: all lengths in the dataset are measured in millimeters.\nMass: Mass is measured in grams.\n\n\npalmer_penguins &lt;- read_rds(\"data-processed/palmer_penguins_clean.RDS\")",
+    "crumbs": [
+      "Palmer's penguins analysis"
+    ]
+  },
+  {
+    "objectID": "01-penguin-analysis.html#count-observations",
+    "href": "01-penguin-analysis.html#count-observations",
+    "title": "Palmer’s penguins analysis",
+    "section": "Count observations",
+    "text": "Count observations\n\nHow many of each sex?\n\npalmer_penguins |&gt; count(sex, name = \"penguin count\")\n\n\n  \n\n\n\n📍 Data takeaway: Of the 355 penguins with data available from 2007 to 2009, roughly half were male and half were female.\n\n\nHow many of each type?\n\npalmer_penguins |&gt; count(species, name = \"penguin_count\") |&gt; mutate(\n  percent_total = penguin_count / nrow(palmer_penguins) * 100\n)\n\n\n  \n\n\n\n📍 Data takeaway: Of the 355 penguins with data available from 2007 to 2009, about 44% were Adelie penguins, 36% were Gentoo penguins, and only 20% were Chinstrap penguins.\n\n\nAverage bill length by sex\nLet’s figure out if there’s a difference between males and females\n\npalmer_penguins |&gt; group_by(sex) |&gt; summarise(avg_bill_size = mean(bill_len))\n\n\n  \n\n\n\n📍 Data takeaway: Of the 355 penguins observed from 2007 to 2009, male bills were about four millimeters longer on average than female bills.\n\n\nAverage bill length by species\nLet’s figure out if there’s a difference between species. We’ll also get the group size.\n\npalmer_penguins |&gt; group_by(species) |&gt; summarise(group_size = n(), avg_bill_size = mean(bill_len))\n\n\n  \n\n\n\n📍 Data takeaway: Of the three species observed, Chinstrap had the longest bills, with an average length of almost 49 millimeters. The Gentoo followed with an average length of about 48 millimeters, and the Adelie had the shortest bills of the group with an average length under 40 millimeters. st",
+    "crumbs": [
+      "Palmer's penguins analysis"
+    ]
   }
 ]
