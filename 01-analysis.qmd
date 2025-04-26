@@ -1,0 +1,12 @@
+
+---
+title: "Analysis"
+format: html
+---
+
+```{r}
+library(tidyverse)
+
+penguins <- palmerpenguins::penguins
+summary(penguins)
+```
