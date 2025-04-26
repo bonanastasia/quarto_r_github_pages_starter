@@ -2,18 +2,22 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "*.qmd"
 
 website:
   title: "Quarto R GitHub Pages Starter"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - href: 01-analysis.qmd
-        text: Analysis
+  sidebar:
+      contents:
+        - href: index.qmd
+          text: Project Overview
+        - href: 00-import-clean-penguins.qmd
+        - href: 01-penguin-analysis.qmd
 
 format:
   html:
     theme: cosmo
+    css: styles.css
     toc: true
+    df-print: paged
     code-overflow: wrap

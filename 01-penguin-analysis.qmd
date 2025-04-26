@@ -1,0 +1,75 @@
+---
+title: "Palmer's penguins analysis"
+format: html
+---
+
+## About this notebook
+
+Let's find out:
+
+1.  How many male and female penguins there are
+2.  How many of each type was observed
+3.  Average bill length by sex
+4.  Average bill length by species
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## Import penguins
+
+**About our data**: The `palmerpenguins` data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. - *Source: [Allison Horst](https://allisonhorst.github.io/palmerpenguins/articles/intro.html%5D)*
+
+**Notes about units:**
+
+-   Lengths: all lengths in the dataset are measured in millimeters.
+
+-   Mass: Mass is measured in grams.
+
+```{r}
+palmer_penguins <- read_rds("data-processed/palmer_penguins_clean.RDS")
+```
+
+## Count observations
+
+### How many of each sex?
+
+```{r}
+palmer_penguins |> count(sex, name = "penguin count")
+```
+
+**📍 Data takeaway:** Of the 355 penguins with data available from 2007 to 2009, roughly half were male and half were female.
+
+### How many of each type?
+
+```{r}
+palmer_penguins |> count(species, name = "penguin_count") |> mutate(
+  percent_total = penguin_count / nrow(palmer_penguins) * 100
+)
+```
+
+**📍 Data takeaway:** Of the 355 penguins with data available from 2007 to 2009, about 44% were Adelie penguins, 36% were Gentoo penguins, and only 20% were Chinstrap penguins.
+
+### Average bill length by sex
+
+Let's figure out if there's a difference between males and females
+
+```{r}
+palmer_penguins |> group_by(sex) |> summarise(avg_bill_size = mean(bill_len))
+```
+
+**📍 Data takeaway:** Of the 355 penguins observed from 2007 to 2009, male bills were about four millimeters longer on average than female bills.
+
+### Average bill length by species
+
+Let's figure out if there's a difference between species. We'll also get the group size.
+
+```{r}
+palmer_penguins |> group_by(species) |> summarise(group_size = n(), avg_bill_size = mean(bill_len))
+```
+
+**📍 Data takeaway:** Of the three species observed, Chinstrap had the longest bills, with an average length of almost 49 millimeters. The Gentoo followed with an average length of about 48 millimeters, and the Adelie had the shortest bills of the group with an average length under 40 millimeters. st

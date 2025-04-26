@@ -1,0 +1,49 @@
+---
+title: "Import Palmer's penguins data"
+format: html
+---
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## About our data
+
+**Data overview**: The `palmerpenguins` data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.
+
+**Data collection:** These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. - *Source: [Allison Horst](https://allisonhorst.github.io/palmerpenguins/articles/intro.html%5D)*
+
+## Import penguins
+
+```{r}
+palmer_penguins_raw <- tibble(penguins)
+
+palmer_penguins_raw
+```
+
+## Cleanup penguins
+
+For our purposes, we need to remove any entries that are missing the sex value.
+
+```{r}
+palmer_penguins_clean <- palmer_penguins_raw |> 
+  filter(
+  !is.na(sex)
+)
+
+palmer_penguins_clean
+```
+
+Ok, that brought our count down to 333 penguins. We're ready to export for our analysis!
+
+## Export penguins
+
+Let's export our dataset as an RDS file for our analysis
+
+```{r}
+palmer_penguins_clean |> write_rds("data-processed/palmer_penguins_clean.RDS")
+```
