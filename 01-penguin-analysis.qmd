@@ -72,4 +72,4 @@ Let's figure out if there's a difference between species. We'll also get the gro
 palmer_penguins |> group_by(species) |> summarise(group_size = n(), avg_bill_size = mean(bill_len))
 ```
 
-**📍 Data takeaway:** Of the three species observed, Chinstrap had the longest bills, with an average length of almost 49 millimeters. The Gentoo followed with an average length of about 48 millimeters, and the Adelie had the shortest bills of the group with an average length under 40 millimeters. st
+**📍 Data takeaway:** Of the three species observed, Chinstrap had the longest bills, with an average length of almost 49 millimeters. The Gentoo followed with an average length of about 48 millimeters, and the Adelie had the shortest bills of the group with an average length under 40 millimeters.
