@@ -4,6 +4,7 @@ project:
   output-dir: _site
   render:
     - "!x-*.qmd"
+    - "00-import-clean-penguins.qmd"
     - "index.qmd"
 
 website:
