@@ -3,16 +3,23 @@ project:
   type: website
   output-dir: _site
   render:
-    - "*.qmd"
+    - "!x-*.qmd"
+    - "index.qmd"
 
 website:
   title: "Quarto R GitHub Pages Starter"
   sidebar:
-      contents:
-        - href: index.qmd
-          text: Project Overview
-        - href: 00-import-clean-penguins.qmd
-        - href: 01-penguin-analysis.qmd
+    style: "floating"
+    search: true
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            href: https://github.com/bonanastasia/quarto_r_github_pages_starter
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - auto: "*.qmd"   
 
 format:
   html:

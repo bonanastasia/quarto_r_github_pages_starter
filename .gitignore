@@ -1,7 +1,11 @@
-git
+
 _site/
 .Rproj.user/
 .Rhistory
 .RData
+.Rprofile
 
 /.quarto/
+
+# Ignore local library copies
+renv/library/
