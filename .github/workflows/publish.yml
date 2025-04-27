@@ -1,43 +1,54 @@
-name: Publish Quarto Website
+name: Publish Quarto Project
 
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up R
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Setup R
         uses: r-lib/actions/setup-r@v2
 
       - name: Cache R packages
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         with:
-          path: ~/.local/share/R
-          key: ${{ runner.os }}-r-${{ hashFiles('**/*.lock') }}
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-r-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-r-
 
-      - name: Install R packages
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            tidyverse
-            rmarkdown
-            knitr
-            palmerpenguins
-          cache: false  # we are manually caching above!
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
-      - name: Install Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Install needed R packages
+        run: |
+          Rscript -e 'install.packages(c("quarto", "knitr", "rmarkdown", "palmerpenguins", "tidyverse"), repos="https://cloud.r-project.org")'
+
+      - name: Cache Quarto build output
+        uses: actions/cache@v3
+        with:
+          path: _site
+          key: ${{ runner.os }}-quarto-${{ hashFiles('**/*.qmd') }}
+          restore-keys: |
+            ${{ runner.os }}-quarto-
 
       - name: Render Quarto Project
-        run: quarto render
+        run: |
+          quarto render
 
-      - name: Deploy to GitHub Pages
+      - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
